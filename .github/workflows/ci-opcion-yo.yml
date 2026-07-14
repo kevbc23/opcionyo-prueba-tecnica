@@ -30,8 +30,7 @@ jobs:
       - name: Start Mockoon server
         run: |
           mockoon-cli start \
-            --data mock/OpcionYo-mock-api.json \
-            --daemon
+            --data mock/OpcionYo-mock-api.json > mockoon.log 2>&1 &
 
           sleep 5
 
