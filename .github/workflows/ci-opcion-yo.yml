@@ -1,0 +1,48 @@
+name: API Automation Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  karate-tests:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+
+      - name: Install Mockoon CLI
+        run: npm install -g @mockoon/cli
+
+
+      - name: Start Mockoon server
+        run: |
+          mockoon-cli start \
+            --data mock/OpcionYo-mock-api.json \
+            --daemon
+
+          sleep 5
+
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+
+
+      - name: Execute Karate tests
+        run: mvn clean test

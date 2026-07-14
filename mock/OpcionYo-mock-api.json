@@ -1,0 +1,539 @@
+{
+  "uuid": "2b6fe4f7-67bf-43e8-ad36-41d8dae14b7b",
+  "lastMigration": 33,
+  "name": "OpcionYo Mock Api",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3001,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "3ca13762-3019-4dea-ab89-360c1f993330",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "api/v1/opcionyo/register",
+      "responses": [
+        {
+          "uuid": "5d627310-5d0c-4a91-ae31-df287e004cc9",
+          "body": "{\n  \"message\": \"Usuario registrado exitosamente\",\n  \"userId\": 1\n}",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "email",
+              "value": "^[A-Za-z0-9._%+-]+@opcionyo-test\\.com$",
+              "invert": false,
+              "operator": "regex"
+            },
+            {
+              "target": "body",
+              "modifier": "password",
+              "value": "^.{8,}$",
+              "invert": false,
+              "operator": "regex"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "dc371b0a-ede6-43f1-915a-2eb7dc9538c8",
+          "body": "{\r\n  \"error\": \"VALIDATION_ERROR\",\r\n  \"message\": \"Se requiere un correo y una contraseña válida\"\r\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "62f3fead-a1f7-419e-852f-6288f3b740fb",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "api/v1/opcionyo/login",
+      "responses": [
+        {
+          "uuid": "300a76a8-6ed8-4f4d-a88d-b14c51e8c7b8",
+          "body": "{\n  \"message\":\"Inicio de sesión exitoso\",\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.fake.token\",\n  \"expiresIn\": 3600\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "email",
+              "value": "^[A-Za-z0-9._%+-]+@opcionyo-test\\.com$",
+              "invert": false,
+              "operator": "regex"
+            },
+            {
+              "target": "body",
+              "modifier": "password",
+              "value": "^.{8,}$",
+              "invert": false,
+              "operator": "regex"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "96057cb2-d4fd-46fc-b9cd-44e3797ca4cc",
+          "body": "{\r\n  \"message\": \"Correo y/o contraseña inválida\"\r\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "4d58c89d-66a3-4a13-8d2f-72edab3c85b6",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "api/v1/opcionyo/protected-resource",
+      "responses": [
+        {
+          "uuid": "834ea084-6977-4fef-b392-56052ea6a5d1",
+          "body": "{\r\n  \"patient\": {\r\n    \"id\": \"PAT-001\",\r\n    \"firstName\": \"Kevin\",\r\n    \"lastName\": \"Bejarano\",\r\n    \"email\": \"kevinbejarano@opcionyo-test.com\"\r\n  },\r\n  \"nextAppointment\": {\r\n    \"id\": \"APT-1001\",\r\n    \"date\": \"2026-07-20\",\r\n    \"time\": \"10:00\",\r\n    \"specialty\": \"Cardiologia\",\r\n    \"doctor\": {\r\n      \"id\": \"DOC-001\",\r\n      \"name\": \"Dra. Maria Lopez\"\r\n    },\r\n    \"status\": \"CONFIRMED\"\r\n  },\r\n  \"videoCall\": {\r\n    \"available\": true,\r\n    \"provider\": \"AWS_CHIME\",\r\n    \"status\": \"READY\"\r\n  }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "^Bearer\\s.+$",
+              "invert": false,
+              "operator": "regex"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "90846d06-51b9-4e48-86ab-1b6822df8a12",
+          "body": "{\r\n \"error\":\"Unauthorized\",\r\n \"code\":\"AUTH_TOKEN_MISSING\",\r\n \"message\":\"El Token de Autenticación es requerido para acceder a este recurso\"\r\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "",
+              "invert": false,
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "2def865f-4f62-45e0-baae-fc8068b198f3",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "webhooks/stripe",
+      "responses": [
+        {
+          "uuid": "30696412-65ea-4ccd-97fb-7c2d4b0cde69",
+          "body": "{\n  \"received\": true,\n  \"message\": \"Webhook processed\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "49f7434f-7447-4d17-a14c-89062e559c48",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "api/v1/opcionyo/subscriptions/sub_001",
+      "responses": [
+        {
+          "uuid": "33d16349-02bf-4ee8-82bc-051e66c9bade",
+          "body": "{\n  \"id\": \"001\",\n  \"stripe_subscription_id\": \"sub_001\",\n  \"status\": \"active\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "8fe6cc13-7b12-43c6-a48d-31edc4d1d730",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "api/v1/opcionyo/specialists/123/availability",
+      "responses": [
+        {
+          "uuid": "894a1212-390d-4474-96ce-76fbfb065d24",
+          "body": "{\r\n  \"specialistId\": \"123\",\r\n  \"availableSlots\": [\r\n    {\r\n      \"date\": \"2026-07-15\",\r\n      \"startTime\": \"10:00\",\r\n      \"available\": true\r\n    }\r\n  ]\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "76be6f97-1e36-432b-abcb-af1a51e7d73c",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "api/v1/opcionyo/appointments",
+      "responses": [
+        {
+          "uuid": "77326b3a-ce88-4d0d-8464-173e11054699",
+          "body": "{\r\n  \"id\": \"appointment_001\",\r\n  \"status\": \"CONFIRMED\",\r\n  \"message\": \"Cita confirmada exitosamente\"\r\n}",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "5a017ee0-57be-4f1a-bc9b-c9dce92ec5bf",
+          "body": "{\n  \"error\": \"SLOT_ALREADY_BOOKED\",\n  \"message\": \"La cita en la hora seleccionada está ocupada. Elija otro horario\"\n}",
+          "latency": 0,
+          "statusCode": 409,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "patientId",
+              "value": "patient_002",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "cdbcdac3-a032-408e-a0cc-e8fb6b828c35",
+      "type": "http",
+      "documentation": "",
+      "method": "patch",
+      "endpoint": "api/v1/opcionyo/appointments/appointment_001/cancel",
+      "responses": [
+        {
+          "uuid": "76a3a01e-d4f2-41d2-9f63-b5803e890cc0",
+          "body": "{\r\n  \"id\": \"appointment_001\",\r\n  \"status\": \"CANCELLED\"\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "f5a1e910-d67a-4f33-b298-cb81d3216b9d",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "chime/join",
+      "responses": [
+        {
+          "uuid": "b543bbc8-59d7-4b23-a2b6-d761cc33a098",
+          "body": "{\n  \"meetingId\": \"meeting-001\",\n  \"attendeeId\": \"attendee-123\",\n  \"joinToken\": \"eyJhbGciOi54aSDFSDFS54DF6Edvq\",\n  \"message\":\"Reunión iniciada con éxito\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "simulateError",
+              "value": "false",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "4c4fbea7-70ee-4b5d-abc4-4046b34b1964",
+          "body": "{\n  \"error\": \"AWS_CHIME_UNAVAILABLE\",\n  \"message\": \"El servicio de videollamadas no está disponible en este momento. Por favor, inténtelo más tarde.\"\n}",
+          "latency": 0,
+          "statusCode": 503,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "simulateError",
+              "value": "true",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "3ca13762-3019-4dea-ab89-360c1f993330"
+    },
+    {
+      "type": "route",
+      "uuid": "62f3fead-a1f7-419e-852f-6288f3b740fb"
+    },
+    {
+      "type": "route",
+      "uuid": "4d58c89d-66a3-4a13-8d2f-72edab3c85b6"
+    },
+    {
+      "type": "route",
+      "uuid": "2def865f-4f62-45e0-baae-fc8068b198f3"
+    },
+    {
+      "type": "route",
+      "uuid": "49f7434f-7447-4d17-a14c-89062e559c48"
+    },
+    {
+      "type": "route",
+      "uuid": "8fe6cc13-7b12-43c6-a48d-31edc4d1d730"
+    },
+    {
+      "type": "route",
+      "uuid": "76be6f97-1e36-432b-abcb-af1a51e7d73c"
+    },
+    {
+      "type": "route",
+      "uuid": "cdbcdac3-a032-408e-a0cc-e8fb6b828c35"
+    },
+    {
+      "type": "route",
+      "uuid": "f5a1e910-d67a-4f33-b298-cb81d3216b9d"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}
