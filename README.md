@@ -1,5 +1,6 @@
 # Opción Yo - Prueba técnica
 ### Autor: Kevin Bejarano Calle
+### QA Engineer
 
 ## Cómo ejecutar todo con un solo comando
 
