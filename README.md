@@ -1,5 +1,5 @@
 # Opción Yo - Prueba técnica
-Autor: Kevin Bejarano Calle
+### Autor: Kevin Bejarano Calle
 
 ## Cómo ejecutar todo con un solo comando
 
