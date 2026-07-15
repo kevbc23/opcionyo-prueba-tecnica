@@ -1,4 +1,4 @@
-# Estrategia de QA
+# Estrategia de QA - Opcion Yo
 
 ## 1. ¿Por dónde comenzar y por qué?
 
